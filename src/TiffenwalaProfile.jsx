@@ -2,6 +2,8 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 function Tiffenwalaprofile() {
+
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const [data, setdata] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -67,7 +69,7 @@ function Tiffenwalaprofile() {
                       <img
                         src={
                           data.file
-                            ? `http://localhost:2000/Upload/${data.file}`
+                            ? `${BASE_URL}/Upload/${data.file}`
                             : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
                         }
                         alt="Profile"

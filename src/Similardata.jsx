@@ -3,6 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 function Similardata() {
   const location = useLocation();
   const data = location.state || [];
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   return (
     <div className="min-h-screen bg-[#fff8f3] overflow-hidden relative px-4 py-10">
@@ -88,7 +89,7 @@ function Similardata() {
                 <div className="relative h-64 overflow-hidden">
                   {item.file ? (
                     <img
-                      src={`http://localhost:2000/Upload/${item.file}`}
+                      src={`${BASE_URL}/Upload/${item.file}`}
                       alt={item.name || "item"}
                       className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                     />

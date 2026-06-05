@@ -17,9 +17,10 @@ function CustomMessageMess() {
     }, 2500);
   };
 
+   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const fetchUserDetails = async (userId) => {
     try {
-      const res = await fetch("http://localhost:2000/getuserdetails", {
+      const res = await fetch(`${BASE_URL}/getuserdetails`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId }),
@@ -42,7 +43,7 @@ function CustomMessageMess() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:2000/custommessagemess", {
+      const res = await fetch(`${BASE_URL}/custommessagemess`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messId }),
@@ -75,7 +76,7 @@ function CustomMessageMess() {
     }
 
     try {
-      const res = await fetch(`http://localhost:2000/replycustommessage/${id}`, {
+      const res = await fetch(`${BASE_URL}/replycustommessage/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -238,7 +239,7 @@ function CustomMessageMess() {
                           <div className="flex items-center gap-3">
                             {item.file ? (
                               <img
-                                src={`http://localhost:2000/Upload/${item.file}`}
+                                src={`${BASE_URL}/Upload/${item.file}`}
                                 alt={item.name}
                                 className="w-20 h-20 rounded-2xl object-cover shadow-lg border"
                               />

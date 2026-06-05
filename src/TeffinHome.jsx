@@ -6,6 +6,8 @@ function TeffenHome() {
   const Joinmess = localStorage.getItem("joinmess");
   const isJoined = MessId || Joinmess;
 
+
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#fff8f3] text-gray-900">
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-orange-300 rounded-full blur-3xl opacity-30"></div>

@@ -18,11 +18,13 @@ const openContactPage = (id) => {
     Getid();
   }, []);
 
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   async function Getid() {
     try {
       setIsLoading(true);
 
-      let res = await fetch("http://localhost:2000/viewteffinwala", {
+      let res = await fetch(`${BASE_URL}/viewteffinwala`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

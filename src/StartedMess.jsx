@@ -5,7 +5,7 @@ function StartedMess() {
   const [userProfiles, setUserProfiles] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  const API_URL = "http://localhost:2000";
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const messId = localStorage.getItem("token");
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function StartedMess() {
     try {
       setIsLoading(true);
 
-      const res = await fetch(`${API_URL}/getmessstart`, {
+      const res = await fetch(`${BASE_URL}/getmessstart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ function StartedMess() {
 
   async function getUserProfile(email) {
     try {
-      const res = await fetch(`${API_URL}/getmess`, {
+      const res = await fetch(`${BASE_URL}/getmess`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +67,7 @@ function StartedMess() {
   }
 
   function handleDownloadPDF(id) {
-    window.open(`${API_URL}/get-pdf/${id}`, "_blank");
+    window.open(`${BASE_URL}/get-pdf/${id}`, "_blank");
   }
 
   const totalUsers = useMemo(() => {
@@ -191,7 +191,7 @@ function StartedMess() {
                             <img
                               src={
                                 profile?.file
-                                  ? `${API_URL}/Upload/${profile.file}`
+                                  ? `${BASE_URL}/Upload/${profile.file}`
                                   : "https://via.placeholder.com/100"
                               }
                               alt="profile"

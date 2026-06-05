@@ -12,13 +12,15 @@ function UserMess() {
     dispatch(Fetchdata());
   }, [dispatch]);
 
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   const product = useSelector((state) => state.product.item);
 
   const handleSearch = async (e) => {
     e.preventDefault();
 
     try {
-      const result = await fetch("http://localhost:2000/search", {
+      const result = await fetch(`${BASE_URL}/search`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -26,6 +28,7 @@ function UserMess() {
         body: JSON.stringify({ qun: searchQuery }),
       });
 
+     
       const data = await result.json();
       navigate("/similar", { state: data.item });
     } catch (error) {

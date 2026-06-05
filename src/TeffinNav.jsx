@@ -20,6 +20,7 @@ function TeffinNav() {
       return null;
     }
   };
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("teffintoken");
@@ -61,7 +62,7 @@ function TeffinNav() {
   };
 
   const profileImg = item?.file
-    ? `http://localhost:2000/Upload/${item.file}`
+    ? `${BASE_URL}/Upload/${item.file}`
     : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
 
   return (

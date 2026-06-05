@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 function MesswalaRegister() {
 
-  const [price,setprice]=useState("")
+
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -16,6 +16,7 @@ function MesswalaRegister() {
     id: "",
     price:""
   });
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +65,7 @@ function MesswalaRegister() {
     });
 
     try {
-      const result = await fetch("http://localhost:2000/messregister", {
+      const result = await fetch(`${BASE_URL}/messregister`, {
         method: "POST",
         body: formDataToSend,
       });
@@ -314,7 +315,7 @@ function MesswalaRegister() {
                   className={inputClass}
                 />
 
-                <input type="text" placeholder=" Enter Montholy Price Of Mess" onChange={(e)=>setprice(e.target.value)} />
+                
 
                 <select
                   name="gender"

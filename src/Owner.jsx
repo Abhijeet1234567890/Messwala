@@ -17,7 +17,7 @@ function Owner() {
     message: "",
   });
 
-  const API_URL = "http://localhost:2000";
+ 
 
   const showToast = (type, message) => {
     setToast({ show: true, type, message });
@@ -55,6 +55,7 @@ function Owner() {
     }
   };
 
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     fetchAllData();
   }, []);
@@ -71,7 +72,7 @@ function Owner() {
         return;
       }
 
-      const ownerRes = await fetch(`${API_URL}/findmess`, {
+      const ownerRes = await fetch(`${BASE_URL}/findmess`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messId: String(messId) }),
@@ -87,7 +88,7 @@ function Owner() {
         setOwner(ownerData.data);
       }
 
-      const itemsRes = await fetch(`${API_URL}/addinstnceitem`, {
+      const itemsRes = await fetch(`${BASE_URL}/addinstnceitem`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: messId }),
@@ -103,7 +104,7 @@ function Owner() {
         setMessItems(cleanItems);
       }
 
-      const foodRes = await fetch(`${API_URL}/addinstance`, {
+      const foodRes = await fetch(`${BASE_URL}/addinstance`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: messId }),
@@ -137,7 +138,7 @@ function Owner() {
 
       setIsEnding(true);
 
-      let res = await fetch(`${API_URL}/endmess`, {
+      let res = await fetch(`${BASE_URL}/endmess`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -364,7 +365,7 @@ function Owner() {
                     {owner.files.map((file, i) => (
                       <Carousel.Item key={i} className="h-[430px]">
                         <img
-                          src={`${API_URL}/Upload/${file}`}
+                          src={`${BASE_URL}/Upload/${file}`}
                           className="w-full h-full object-cover"
                           alt="mess"
                         />
@@ -452,7 +453,7 @@ function Owner() {
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
-                    src={`${API_URL}/Upload/${food.file}`}
+                    src={`${BASE_URL}/Upload/${food.file}`}
                     alt={food.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                   />

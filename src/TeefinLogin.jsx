@@ -8,6 +8,8 @@ function TeffenLogin() {
     pass: "",
   });
 
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [toast, setToast] = useState({
@@ -48,7 +50,7 @@ function TeffenLogin() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:2000/teffinlogin", {
+      const res = await fetch(`${BASE_URL}/teffinlogin`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

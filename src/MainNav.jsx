@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 
+
+
 function MainNav() {
+
+    const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [select, setSelect] = useState("");
   const navigate = useNavigate();

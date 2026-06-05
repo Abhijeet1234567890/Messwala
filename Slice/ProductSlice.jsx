@@ -1,8 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
+  
 export const Fetchdata = createAsyncThunk("product", async () => {
 
-    let result = await fetch(`http://localhost:2000/messlist`, {
+    const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+    let result = await fetch(`${BASE_URL}/messlist`, {
         method: "GET",
     });
 
@@ -34,7 +37,7 @@ const GetData = createSlice({
 
         builder.addCase(Fetchdata.rejected, (state, action) => {
             state.status = "Rejected";
-           
+            state.error = action.error.message;
         });
     }
 });

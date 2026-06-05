@@ -11,6 +11,8 @@ function TeffenwalRegister() {
     contact: "",
   });
 
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -56,7 +58,7 @@ function TeffenwalRegister() {
     formDataToSend.append("file", file);
 
     try {
-      const result = await fetch("http://localhost:2000/teffinregister", {
+      const result = await fetch(`${BASE_URL}/teffinregister`, {
         method: "POST",
         body: formDataToSend,
       });

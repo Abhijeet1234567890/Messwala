@@ -22,6 +22,8 @@ function MessDetail() {
   const monthlyPrice = 2500;
   const totalAmount = monthlyPrice * subscriptionMonth;
 
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   let email = "";
   let userid = "";
 
@@ -52,7 +54,7 @@ function MessDetail() {
     if (!MessId) return showToast("error", "Mess not selected.");
 
     try {
-      const res = await fetch("http://localhost:2000/livemess", {
+      const res = await fetch(`${BASE_URL}/livemess`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messId: MessId }),
@@ -87,7 +89,7 @@ function MessDetail() {
     if (!MessId) return showToast("error", "Mess not selected.");
 
     try {
-      let result = await fetch("http://localhost:2000/checkmenu", {
+      let result = await fetch(`${BASE_URL}/checkmenu`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ menu, messid: MessId }),
@@ -116,7 +118,7 @@ function MessDetail() {
 
   const SaveSubscriptionAfterPayment = async (paymentData) => {
     try {
-      const response = await fetch("http://localhost:2000/messstart", {
+      const response = await fetch(`${BASE_URL}/messstart`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
 
@@ -160,7 +162,7 @@ function MessDetail() {
     }
 
     try {
-      const orderRes = await fetch("http://localhost:2000/create-order", {
+      const orderRes = await fetch(`${BASE_URL}/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -212,7 +214,7 @@ function MessDetail() {
     }
 
     try {
-      const res = await fetch("http://localhost:2000/getcustomization", {
+      const res = await fetch(`${BASE_URL}/getcustomization`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -430,7 +432,7 @@ function MessDetail() {
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div className="relative rounded-[28px] overflow-hidden h-[330px] shadow-xl">
                 <img
-                  src={`http://localhost:2000/Upload/${selectedMenu.file}`}
+                  src={`${BASE_URL}/Upload/${selectedMenu.file}`}
                   alt={selectedMenu.name}
                   className="w-full h-full object-cover hover:scale-110 duration-700"
                 />

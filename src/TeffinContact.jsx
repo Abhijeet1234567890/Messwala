@@ -10,11 +10,13 @@ function TeffinContact() {
     getProvider();
   }, [id]);
 
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   async function getProvider() {
     try {
       setIsLoading(true);
 
-      const res = await fetch(`http://localhost:2000/teffincontact/${id}`);
+      const res = await fetch(`${BASE_URL}/teffincontact/${id}`);
       const data = await res.json();
 
       setProvider(data.data);
@@ -71,7 +73,7 @@ function TeffinContact() {
           <div className="bg-white rounded-[45px] p-8 shadow-2xl border border-orange-100 text-center">
             {profileImage ? (
               <img
-                src={`http://localhost:2000/Upload/${profileImage}`}
+                src={`${BASE_URL}/Upload/${profileImage}`}
                 alt={provider.name}
                 className="w-36 h-36 mx-auto rounded-full object-cover border-4 border-orange-400 shadow-xl mb-6"
               />

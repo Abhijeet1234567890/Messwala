@@ -11,6 +11,8 @@ function SmallCalendar({ onSelect }) {
   const startDay = startOfMonth.getDay();
   const totalDays = endOfMonth.getDate();
 
+  
+
   const prevMonth = () => {
     setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
   };

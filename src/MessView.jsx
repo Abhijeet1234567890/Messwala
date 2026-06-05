@@ -19,12 +19,13 @@ function MessView() {
     localStorage.setItem("messId", item._id || item.id);
     navigate("/joinmess");
   };
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   const GetData = async () => {
     try {
       setIsLoading(true);
 
-      let result = await fetch(`http://localhost:2000/viewmess/${id}`);
+      let result = await fetch(`${BASE_URL}/viewmess/${id}`);
       result = await result.json();
 
       setData(result.result || []);
@@ -107,7 +108,7 @@ function MessView() {
                         i.files.map((file, fileIndex) => (
                           <Carousel.Item key={fileIndex} className="h-[420px]">
                             <img
-                              src={`http://localhost:2000/Upload/${file}`}
+                              src={`${BASE_URL}/Upload/${file}`}
                               alt={i.name}
                               className="w-full h-full object-cover"
                             />

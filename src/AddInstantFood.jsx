@@ -28,6 +28,7 @@ function AddInstanceFood() {
     }));
   };
 
+ const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
 
@@ -41,6 +42,8 @@ function AddInstanceFood() {
     setFile(selectedFile);
     setMessage("");
   };
+
+  
 
   const handleAddFood = async (e) => {
     e.preventDefault();
@@ -64,7 +67,7 @@ function AddInstanceFood() {
       formDataToSend.append("file", file);
       formDataToSend.append("messid", messid);
 
-      const result = await fetch("http://localhost:2000/addinstance", {
+      const result = await fetch(`${BASE_URL}/addinstance`, {
         method: "POST",
         body: formDataToSend,
       });

@@ -42,12 +42,13 @@ function MesswalaLogin() {
     }));
   };
 
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const result = await fetch("http://localhost:2000/messlogin", {
+      const result = await fetch(`${BASE_URL}/messlogin`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

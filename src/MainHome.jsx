@@ -7,12 +7,15 @@ import { Link } from "react-router-dom";
 function MainHome() {
 
   const dispatch = useDispatch();
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
 
     dispatch(Fetchdata());
 
   }, [dispatch]);
+
+ 
 
   const product = useSelector((state) => state.product.item);
 
@@ -50,7 +53,7 @@ function MainHome() {
                   >
 
                     <img
-                      src={`http://localhost:2000/Upload/${file}`}
+                      src={`${BASE_URL}/Upload/${file}`}
                       alt="Mess"
                       className="w-full h-full object-cover"
                     />
@@ -246,7 +249,7 @@ function MainHome() {
                 <div className="relative h-64 overflow-hidden">
 
                   <img
-                    src={`http://localhost:2000/Upload/${i.files?.[0]}`}
+                    src={`${BASE_URL}/Upload/${i.files?.[0]}`}
                     alt={i.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                   />

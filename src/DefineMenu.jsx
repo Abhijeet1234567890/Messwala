@@ -14,6 +14,7 @@ function DefineMenu() {
   const [toast, setToast] = useState({ message: "", type: "" });
   const messId = localStorage.getItem("token");
 
+   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const days = [
     { short: "Mon", full: "Monday" },
     { short: "Tue", full: "Tuesday" },
@@ -42,7 +43,7 @@ function DefineMenu() {
     try {
       setMenuLoading(true);
 
-      const res = await fetch("http://localhost:2000/checkmenu", {
+      const res = await fetch(`${BASE_URL}/checkmenu`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +89,7 @@ function DefineMenu() {
       formdata.append("day", day);
       formdata.append("messid", messId);
 
-      const res = await fetch("http://localhost:2000/definemenu", {
+      const res = await fetch(`${BASE_URL}/definemenu`, {
         method: "POST",
         body: formdata,
       });
@@ -210,7 +211,7 @@ function DefineMenu() {
                   <div className="flex flex-col sm:flex-row gap-5 items-center">
                     {selectedMenu.file ? (
                       <img
-                        src={`http://localhost:2000/Upload/${selectedMenu.file}`}
+                        src={`${BASE_URL}/Upload/${selectedMenu.file}`}
                         alt={selectedMenu.name}
                         className="w-full sm:w-40 h-44 object-cover rounded-3xl shadow-lg border-4 border-white"
                       />

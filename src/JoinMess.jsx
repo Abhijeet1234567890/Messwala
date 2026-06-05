@@ -13,6 +13,8 @@ function JoinMess() {
     note: "",
   });
 
+   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [isLoading, setIsLoading] = useState(false);
   const [toast, setToast] = useState({ show: false, type: "", message: "" });
   const navigate = useNavigate();
@@ -51,7 +53,7 @@ function JoinMess() {
     };
 
     try {
-      let res = await fetch("http://localhost:2000/joinmess", {
+      let res = await fetch(`${BASE_URL}/joinmess`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
