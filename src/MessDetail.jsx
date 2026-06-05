@@ -180,7 +180,7 @@ function MessDetail() {
       }
 
       const options = {
-        key: "rzp_test_SwrLM1pkCtfYvm",
+        key: "rzp_test_SxvHG5ettHbV6s",
         amount: orderData.order.amount,
         currency: "INR",
         name: "Tiffin Dashboard",

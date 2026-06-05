@@ -12,7 +12,31 @@ function DefineMenu() {
   const [menuNotFound, setMenuNotFound] = useState(false);
 
   const [toast, setToast] = useState({ message: "", type: "" });
-  const messId = localStorage.getItem("token");
+  const getStoredMessId = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return "";
+
+    try {
+      const parsedToken = JSON.parse(token);
+
+      if (typeof parsedToken === "string" || typeof parsedToken === "number") {
+        return String(parsedToken);
+      }
+
+      return (
+        parsedToken?._id ||
+        parsedToken?.id ||
+        parsedToken?.messId ||
+        parsedToken?.user_id ||
+        ""
+      );
+    } catch {
+      return token;
+    }
+  };
+
+  const messId = getStoredMessId();
 
    const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const days = [
@@ -35,7 +59,20 @@ function DefineMenu() {
     return URL.createObjectURL(file);
   }, [file]);
 
+  const readResponse = async (response) => {
+    try {
+      return await response.json();
+    } catch {
+      return {};
+    }
+  };
+
   const checkMenuByDay = async (selectedDay) => {
+    if (!messId) {
+      showToast("Mess login id not found. Please login again.", "error");
+      return;
+    }
+
     setDay(selectedDay);
     setSelectedMenu(null);
     setMenuNotFound(false);
@@ -50,11 +87,20 @@ function DefineMenu() {
         },
         body: JSON.stringify({
           menu: selectedDay,
-          messid: messId,
+          day: selectedDay,
+          messid: String(messId),
+          messId: String(messId),
         }),
       });
 
-      const data = await res.json();
+      const data = await readResponse(res);
+
+      if (!res.ok) {
+        setSelectedMenu(null);
+        setMenuNotFound(false);
+        showToast(data.message || "Unable to check menu", "error");
+        return;
+      }
 
       if (res.ok && data.result && data.result.length > 0) {
         setSelectedMenu(data.result[0]);
@@ -79,6 +125,10 @@ function DefineMenu() {
       return showToast("All fields are required", "error");
     }
 
+    if (!messId) {
+      return showToast("Mess login id not found. Please login again.", "error");
+    }
+
     try {
       setIsLoading(true);
 
@@ -86,15 +136,18 @@ function DefineMenu() {
       formdata.append("name", name);
       formdata.append("file", file);
       formdata.append("discription", discription);
+      formdata.append("description", discription);
       formdata.append("day", day);
-      formdata.append("messid", messId);
+      formdata.append("menu", day);
+      formdata.append("messid", String(messId));
+      formdata.append("messId", String(messId));
 
       const res = await fetch(`${BASE_URL}/definemenu`, {
         method: "POST",
         body: formdata,
       });
 
-      const result = await res.json();
+      const result = await readResponse(res);
 
       if (!res.ok) {
         return showToast(result.message || "Menu add failed", "error");
